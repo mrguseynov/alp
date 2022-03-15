@@ -11,6 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+ mix.js('resources/js/app.js', 'public/js')
+ // add these 2 lines
+ .js('node_modules/swiper/swiper-bundle.js', 'public/js')
+ .postCss('node_modules/swiper/swiper-bundle.min.css', 'public/css')
+ // end
+ .sass('resources/sass/app.scss', 'public/css')
+ .sourceMaps();
