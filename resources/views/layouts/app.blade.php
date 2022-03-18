@@ -64,6 +64,7 @@
             <div class="ttloading-bg"></div>
             @include('layouts.web.header')
             @yield('content')
+            @include('layouts.web.footer')
         </div>
         <script><!--
             var tt_live_search = {
