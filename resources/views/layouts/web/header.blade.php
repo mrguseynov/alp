@@ -23,26 +23,25 @@
                         <div class="pull-left">
                             <div id="form-language">
                                 <div class="btn-group">
-                                <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                <img src="image/en-gb.png" alt="English" title="English">
-                                <span class="hidden-xs hidden-sm hidden-md">Language</span>&nbsp;<i class="material-icons"></i></button>
-                                <ul>
-                                    <li>
-                                        <a href="/en" class="btn btn-link btn-block language-select selected">
-                                        <img src="image/en-gb.png" alt="English" title="English" /> English</a>
-                                    </li>
-                                    <li>
-                                        <a href="/az" class="btn btn-link btn-block language-select ">
-                                        <img src="image/ar-lb.png" alt="Arabic" title="Arabic" /> Arabic</a>
-                                    </li>
-                                    <li>
-                                        <a href="/tr" class="btn btn-link btn-block language-select ">
-                                        <img src="image/ar-lb.png" alt="Arabic" title="Arabic" /> Arabic</a>
-                                    </li>
-                                </ul>
+                                    <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                                    <img src="{{ asset('images/flags/'.app()->getLocale().'.svg') }}" alt="English" title="English">
+                                    <span class="hidden-xs hidden-sm hidden-md">Language</span>&nbsp;<i class="material-icons"></i></button>
+                                    <ul>
+                                        @foreach (config('app.available_locales') as $language => $locale)
+
+                                            <li>
+                                                <a href="/{{$locale}}" class="btn btn-link btn-block language-select @if ( $locale == app()->getLocale())selected @endif">
+                                                    <img src="{{ asset('images/flags/'.$locale.'.svg') }}" alt="{{$language}}" title="{{$language}}" />
+                                                    {{$language}}
+                                                </a>
+                                            </li>
+
+
+                                        @endforeach
+
+                                    </ul>
                                 </div>
-                                <input type="hidden" name="code" value="" />
-                                <input type="hidden" name="redirect" value="#" />
+
                             </div>
                         </div>
                     </div>
@@ -75,10 +74,10 @@
                 <div class="container">
                     <div class="header-left">
                     <div id="logo">
-                        <a href="#"><img src="image/logo.png" title="Your Store" alt="Your Store" class="img-responsive" /></a>
+                        <a href="#"><img src="{{ asset('images/items/logo.png') }}" title="Your Store" alt="Your Store" class="img-responsive" /></a>
                     </div>
                     <div id="mobile-logo">
-                        <a href="#"><img src="image/logo.png" title="Your Store" alt="Your Store" class="mobile-logo" /></a>
+                        <a href="#"><img src="{{ asset('images/items/logo.png') }}g" title="Your Store" alt="Your Store" class="mobile-logo" /></a>
                     </div>
                     </div>
                     <div class="search-icon col-sm-5">
@@ -174,7 +173,7 @@
                                 <div class="box-content">
                                 <div class="offer-banner col-sm-4">
                                     <a href="#">
-                                    <img src="image/header-banner.jpg" alt="banner1">
+                                    <img src="{{ asset('images/items/header-banner.jpg') }}" alt="banner1">
                                     </a>
                                 </div>
                                 </div>
@@ -211,13 +210,13 @@
                         <aside id="header-left">
                             <div class="main-category-list left-menu">
                                 <div class="cat-menu">
-                                <div class="TT-panel-heading default-open" title="Shop Categories">
+                                <div class="TT-panel-heading @if(Route::is('home'))default-open @else current-close @endif " title="Shop Categories">
                                     <i class='material-icons'>dehaze</i>
                                     <i class='material-icons close-icon'>close</i>
                                     <span>Shop Categories</span>
                                 </div>
                                 <div class="tt-menu horizontal-menu tt-menu-bar" id="tt-menu-9974">
-                                    <ul class="ul-top-items">
+                                    <ul class="ul-top-items" @if(Route::is('home')) @else style="display:none" @endif>
                                         <li class="li-top-item mega-menu">
                                             <a class="a-top-link" href="#">
                                             <span>Home</span>
@@ -233,7 +232,7 @@
                                                         Electronics
                                                         </span>
                                                         <span class="image">
-                                                        <img src="image/demo-1.png" alt="image">
+                                                        <img src="{{ asset('images/items/demo-1.png') }}" alt="image">
                                                         </span>
                                                         </a>
                                                     </div>
@@ -243,7 +242,7 @@
                                                         Electronics v2
                                                         </span>
                                                         <span class="image">
-                                                        <img src="image/demo-2.png" alt="image">
+                                                        <img src="{{ asset('images/items/demo-2.png') }}" alt="image">
                                                         </span>
                                                         </a>
                                                     </div>
@@ -253,7 +252,7 @@
                                                         Electronics v3
                                                         </span>
                                                         <span class="image">
-                                                        <img src="image/demo-3.png" alt="image">
+                                                        <img src="{{ asset('images/items/demo-3.png') }}" alt="image">
                                                         </span>
                                                         </a>
                                                     </div>
@@ -263,7 +262,7 @@
                                                         Coming Soon
                                                         </span>
                                                         <span class="image">
-                                                        <img src="image/demo-4.png" alt="image">
+                                                        <img src="{{ asset('images/items/demo-4.png') }}" alt="image">
                                                         </span>
                                                         </a>
                                                     </div>
@@ -436,7 +435,7 @@
                                                 <h4><strong></strong></h4>
                                                 <div class="menu-banner">
                                                     <a href="#">
-                                                    <img src="image/menu-banner.jpg" alt="menu-banner">
+                                                    <img src="{{ asset('images/items/menu-banner.jpg') }}" alt="menu-banner">
                                                     </a>
                                                 </div>
                                             </div>
@@ -505,18 +504,41 @@
                         </ul>
                     </div>
                     <div class="user-cart">
+
+
                         <div class="user-info">
                             <div class="dropdown">
                                 <a href="index.php?route=account/account" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="material-icons user">perm_identity</i>
                                 <span class="ttuserheading">My Account</span><i class="material-icons expand-more">expand_more</i></a>
                                 <ul class="dropdown-menu dropdown-menu-right account-link-toggle">
-                                <li><a href="index.php?route=account/login"><i class="material-icons">lock_outline</i> Login</a></li>
-                                <li><a href="index.php?route=account/register"><i class='material-icons reg-person'>perm_identity</i> Register</a></li>
-                                <li><a href="index.php?route=product/compare" id="compare-total" title="Compare (0)">
-                                    <i class="material-icons icon-compare">repeat</i> <span class="hidden-sm hidden-md">Compare (0)</span></a>
-                                </li>
-                                <li><a href="index.php?route=account/wishlist" id="wishlist-total" title="Wish List (0)"><i class="material-icons favorite">favorite_border</i> <span class="hidden-sm hidden-md">Wish List (0)</span></a></li>
+                                    @if (Route::has('login'))
+                                        @auth
+                                        <li><a href="{{route('user.profile', app()->getlocale())}}">Profile</a></li>
+
+                                        <li>
+                                            <a href="{{ route('logout', app()->getLocale()) }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+
+                                        </li>
+                                        @else
+                                            <li><a href="{{route('login', app()->getLocale())}}"><i class="material-icons">lock_outline</i> Login</a></li>
+                                            @if (Route::has('register'))
+                                            <li><a href="{{ route('register', app()->getLocale()) }}"><i class='material-icons reg-person'>perm_identity</i> Register</a></li>
+                                            @endif
+                                        @endauth
+                                    @else
+
+                                    @endif
+
+                                    <li><a href="index.php?route=product/compare" id="compare-total" title="Compare (0)">
+                                        <i class="material-icons icon-compare">repeat</i> <span class="hidden-sm hidden-md">Compare (0)</span></a>
+                                    </li>
+                                    <li><a href="index.php?route=account/wishlist" id="wishlist-total" title="Wish List (0)"><i class="material-icons favorite">favorite_border</i> <span class="hidden-sm hidden-md">Wish List (0)</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -541,7 +563,7 @@
         </header>
     </div>
 </div>
-<div class="header-content-title"></div>
+
 <script>
     $(document).ready(function() {
     /* ---------------- start link more menu ----------------------*/

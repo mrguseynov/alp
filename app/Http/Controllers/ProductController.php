@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductController extends Controller
 {
+    use HasFactory;
+    protected $fillable = ['title', 'img', 'text', 'description', 'slug', 'cat_id', 'user_id'];
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -47,7 +50,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return true;
     }
 
     /**

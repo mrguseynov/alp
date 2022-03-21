@@ -113,7 +113,8 @@
                                    </div>
                                    <div class="thumb-description">
                                       <div class="caption">
-                                         <h4><a href="#">{{$row->title}}</a></h4>
+
+                                         <h4><a href="{{route('product.show', ['product' => $row->id, app()->getLocale()])}}">{{$row->title}}</a></h4>
                                          <div class="rating no-rating">
                                            {{$row->category->title}}
 
@@ -2717,7 +2718,7 @@
              </div>
           </div>
           <script>
-             $('#carousel0').swiper({
+            $('#carousel0').swiper({
                  mode: 'horizontal',
                  autoplay: 3000,
                  //pagination: '.carousel0',
@@ -2725,36 +2726,69 @@
                  paginationClickable: false,
                  prevButton: '.swiper-button-prev',
                  nextButton: '.swiper-button-next',
-
-              // Default parameters
-               slidesPerView: 5,
-
-               // Responsive breakpoints
-               breakpoints: {
-                     // when window width is <= 1200px
-                     1300: {
-                       slidesPerView: 5
-                     },
-                      // when window width is <= 1199px
-                     1199: {
-                       slidesPerView: 4
-                     },
-                      // when window width is <= 767px
-                     767: {
-                       slidesPerView: 3
-                     },
-                     // when window width is <= 480px
-                     480: {
-                       slidesPerView: 2
-                     }
+                 // Default parameters
+                 slidesPerView: 5,
+                 // Responsive breakpoints
+                 breakpoints: {
+                        // when window width is <= 1200px
+                        1300: {
+                        slidesPerView: 5
+                        },
+                        // when window width is <= 1199px
+                        1199: {
+                        slidesPerView: 4
+                        },
+                        // when window width is <= 767px
+                        767: {
+                        slidesPerView: 3
+                        },
+                        // when window width is <= 480px
+                        480: {
+                        slidesPerView: 2
+                        }
                 }
 
-             });
-             -->
+            });
+
           </script>
        </div>
     </div>
  </div>
 
-
+<script>
+	$(window).load(function() {
+        tt_quickview.initQuickViewContainer();
+    });
+    var tt_quickview = {
+        initQuickViewContainer: function() {
+            $("body").append('<div class="quickview-container"></div>'), $("div.quickview-container").load("https://demo.templatetrip.com/Opencart/OPCTM01/OPCTM010_techyguy/OPC01/index.php?route=product/tt_quickview/appendcontainer")
+        },
+        appendCloseFrameLink: function() {
+            var i = $("#qv-text-close").val();
+            $("div#quickview-content").prepend("<a href='javascript:void(0);' class='a-qv-close' onclick='tt_quickview.closeQVFrame()'>" + i + "</a>")
+        },
+        closeQVFrame: function() {
+            $("#quickview-bg-block").hide(), $(".quickview-load-img").hide(), $("div#quickview-content").hide().html("")
+        },
+        ajaxView: function(i) {
+            i = -1 != i.search("route=product/product") ? i.replace("route=product/product", "route=product/tt_quickview") : "index.php?route=product/tt_quickview/seoview&ourl=" + i, $.ajax({
+                url: i,
+                type: "get",
+                beforeSend: function() {
+                    $("#quickview-bg-block").show(), $(".quickview-load-img").show()
+                },
+                success: function(i) {
+                    1 == i.success && ($(".quickview-load-img").hide(), $("#quickview-content").html(i.html), tt_quickview.appendCloseFrameLink(), $("#quickview-content").show(), $("#datetimepicker").datetimepicker({
+                        pickTime: !1
+                    }), $("#datetime").datetimepicker({
+                        pickDate: !0,
+                        pickTime: !0
+                    }), $("#Time").datetimepicker({
+                        pickDate: !1
+                    }))
+                }
+            })
+        }
+    };
+</script>
 @endsection

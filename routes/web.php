@@ -1,8 +1,12 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\ProfileController;
+use Illuminate\Auth\Events\Verified;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,32 +18,38 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
 
+/*Route::get('/anar', function () {
+    return view('welcome');
+
+});*/
+/*
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 */
-Auth::routes();
-/*Route::get('/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'ge', 'tr', 'ru'])) {
-        App::setLocale("en");
-    }
-    else{
-        App::setLocale($locale);
-    }
-    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-});*/
-Route::group([ 'prefix' => '/{locale}', 'where' => ['locale', '[a-zA-Z]{2}'] ],function ($locale) {
-    if (! in_array($locale, ['en', 'ge', 'tr', 'ru'])) {
-        App::setLocale("en");
-    }
-    else{
-        App::setLocale($locale);
-    }
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+/*Route::group([ 'prefix' => '/{locale}/user','middleware' => ['localization', 'auth', 'verified'], 'where' => ['locale', '[a-zA-Z]{2}'] ],function ($locale) {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('home');
+})->name('');*/
+
+Route::get('/',function ()
+{
+    return redirect(app()->getlocale());
 });
+Route::group([
+    'prefix' => '{locale}',
+    'middleware' => 'localization',
+    'where' => ['locale', '[a-zA-Z]{2}']
+],function ($locale) {
+    Auth::routes();
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::resource('product', ProductController::class);
+});
+
+Route::prefix('{locale}/user')->middleware(['auth', 'verified', 'localization'])->name('user.')->group(function($locale){
+    Route::get('profile',ProfileController::class)->name('profile');
+});
+
+

@@ -28,7 +28,8 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    //'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,6 +97,21 @@ return [
     */
 
     'fallback_locale' => 'en',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available locales
+    |--------------------------------------------------------------------------
+    |
+    | List all locales that your application works with
+    |
+    */
+    'available_locales' => [
+        'English' => 'en',
+        'Russian' => 'ru',
+        'Turkish' => 'tr',
+        'Georgian' => 'ge',
+      ],
 
     /*
     |--------------------------------------------------------------------------

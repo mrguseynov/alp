@@ -222,17 +222,17 @@
                                <div class="ttfooter-logo">
                                   <div class="ttfooter-img1 ttfooter-img">
                                      <a href="#">
-                                     <img src="image/app-1.png" alt="appstore">
+                                     <img src="{{ asset('images/items/app-1.png') }}" alt="appstore">
                                      </a>
                                   </div>
                                   <div class="ttfooter-img2 ttfooter-img">
                                      <a href="#">
-                                     <img src="image/app-2.png" alt="googleplay">
+                                     <img src="{{ asset('images/items/app-2.png') }}" alt="googleplay">
                                      </a>
                                   </div>
                                   <div class="ttfooter-img3 ttfooter-img">
                                      <a href="#">
-                                     <img src="image/app-3.png" alt="googleplay">
+                                     <img src="{{ asset('images/items/app-3.png') }}" alt="googleplay">
                                      </a>
                                   </div>
                                </div>
@@ -247,12 +247,12 @@
                             <div id="ttpaymentlogo">
                                <div class="payment_logo_block">
                                   <ul class="payment-list">
-                                     <li class="visa"><a href="#"><img alt="visa" src="image/payment-1.png"></a></li>
-                                     <li class="paypal"><a href="#"> <img alt="paypal" src="image/payment-3.png"></a></li>
-                                     <li class="cod"><a href="#"> <img src="image/payment-4.png" alt="cod"></a></li>
-                                     <li class="google"><a href="#"> <img alt="paypal" src="image/payment-5.png"></a></li>
-                                     <li class="ebay"><a href="#"> <img alt="ebay" src="image/payment-6.png"></a></li>
-                                     <li class="ebay"><a href="#"> <img alt="ebay" src="image/payment-7.png"></a></li>
+                                     <li class="visa"><a href="#"><img alt="visa" src="{{ asset('images/items/payment-1.png') }}"></a></li>
+                                     <li class="paypal"><a href="#"> <img alt="paypal" src="{{ asset('images/items/payment-3.png') }}"></a></li>
+                                     <li class="cod"><a href="#"> <img src="{{ asset('images/items/payment-4.png') }}" alt="cod"></a></li>
+                                     <li class="google"><a href="#"> <img alt="paypal" src="{{ asset('images/items/payment-5.png') }}"></a></li>
+                                     <li class="ebay"><a href="#"> <img alt="ebay" src="{{ asset('images/items/payment-6.png') }}"></a></li>
+                                     <li class="ebay"><a href="#"> <img alt="ebay" src="{{ asset('images/items/payment-7.png') }}"></a></li>
                                   </ul>
                                </div>
                             </div>

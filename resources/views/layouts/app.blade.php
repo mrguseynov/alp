@@ -15,7 +15,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <meta name="description" content="My Store" />
-        <link href="image/cart.png" rel="icon" />
+        <link href="{{ asset('images/items/cart.png') }}" rel="icon" />
         <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <link href='https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet' type='text/css'>
@@ -59,14 +59,20 @@
         <script src="{{ asset('js/jquery.cookie.js') }}"></script>
         <script src="{{ asset('js/ttcountdown.js') }}"></script>
     </head>
-    <body class="common-home header_style2 product_btn_style1 product_pagination productlayout_default responsive_style1    ">
+    <body class="common-home header_style2 product_btn_style1 product_pagination productlayout_default responsive_style1 ">
+
+
         <div id="page">
             <div class="ttloading-bg"></div>
             @include('layouts.web.header')
+            @if(Route::is('home'))
+                @include('layouts.web.slider')
+            @endif
+
             @yield('content')
             @include('layouts.web.footer')
         </div>
-        <script><!--
+        <script>
             var tt_live_search = {
                 selector: '#header-search input[name=\'search\']',
                 text_no_matches: '',
@@ -96,7 +102,7 @@
                         else{
                             var html = '';
                             html += '<li style="text-align: center;height:10px;">';
-                            html +=	'<img class="loading" src="image/loading.gif" />';
+                            html +=	'<img class="loading" src="{{ asset('images/items/loading.gif') }}" />';
                             html +=	'</li>';
                             $('.live-search ul').html(html);
                             $('.live-search').css('display','block');

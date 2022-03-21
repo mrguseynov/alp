@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
 
-            'title' => $this->faker->unique()->text(50),
+            'title' => $this->faker->unique()->word,
             'img'=> $this->faker->imageUrl(),
             'description'=> $this->faker->text(400),
             'slug'=> Str::slug($this->faker->name),
